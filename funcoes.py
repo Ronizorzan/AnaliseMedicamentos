@@ -293,6 +293,7 @@ def Treexplainer(model, novos_dados):
 
 
 #==========================================================================================================
+
 def st_shap(plot, height=300, width=600):
     """
     Recebe um objeto force_plot do SHAP, converte para HTML e o renderiza no Streamlit.
@@ -302,10 +303,30 @@ def st_shap(plot, height=300, width=600):
       - height: Altura do componente HTML exibido.
       - width: Largura do componente HTML exibido.      
     """
-    # O SHAP necessita que o JavaScript seja carregado na página.
-    # Concatenamos o JS disponibilizado pelo shap.getjs() com o HTML do force plot.
-    shap_html = f"<head>{shap.getjs()}</head><body>{plot.html()}</body>"
+    custom_css = """
+    <style type="text/css">
+      html, body {
+          background-color:#2C2E31 !important;
+          margin: 0;
+          padding: 0;
+      }
+      /* Caso o container interno possua fundo branco, forçamos outra cor */
+      div, svg, .shap-plot {
+          background-color: #2C2E31 !important;
+      }
+    </style>
+    """
+    shap_html = f"""
+    <html>
+      <head>
+        {shap.getjs()}
+        {custom_css}
+      </head>
+      <body style="margin:0; padding:0;">
+        {plot.html()}
+      </body>
+    </html>
+    """
     components.html(shap_html, height=height, width=width)
-
 
 

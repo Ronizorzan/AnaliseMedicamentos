@@ -1,5 +1,4 @@
 import streamlit as st
-from sklearn.preprocessing import LabelEncoder
 from funcoes import *
 from joblib import load
 
@@ -59,7 +58,7 @@ if processar:
     
     progresso.progress(75, "Gerando Interpretação!")
     figura = Treexplainer(modelo, novos_dados)
-    st.markdown("<h2 style='text-align: center;'>Interpretação do Modelo</h2>", unsafe_allow_html=True)
+    st.markdown("<h2 style='text-align: center;'>Interpretação do Modelo</h2>", unsafe_allow_html=True)        
     st_shap(figura, height=200, width=1600) # Plotar o gráfico SHAP    
     progresso.progress(100, "Processamento concluído!")   
 

@@ -271,8 +271,8 @@ def Treexplainer(model, novos_dados):
     """
     # Inicializa o TreeExplainer e calcula os valores SHAP
     tree_explainer = shap.TreeExplainer(model)
-    shap_values = tree_explainer.shap_values(novos_dados)
-    shap.initjs()
+    shap_values = tree_explainer.shap_values(novos_dados)    
+    #shap.initjs()
 
     # Se o expected_value for uma lista/array, usamos o primeiro elemento
     if isinstance(tree_explainer.expected_value, (list, tuple, np.ndarray)):

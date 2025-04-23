@@ -94,3 +94,4 @@ shap==0.45.0
 graphviz==0.20.3
 wordcloud==1.9.4
 seaborn==0.13.2
+ipython==8.15.0

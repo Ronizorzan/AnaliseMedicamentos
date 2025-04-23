@@ -38,7 +38,7 @@ if processar:
                             text="Processando os dados inseridos... Por favor aguarde um momento.")    
     try:            
         for nome_coluna in categoricas: # Carregamento do encoder para cada coluna categórica
-            arquivo_encoder = f'objects\encoder_{nome_coluna}.joblib'
+            arquivo_encoder = f'objects/encoder_{nome_coluna}.joblib'
             encoder = load(arquivo_encoder)
             novos_dados[nome_coluna] = encoder.transform(novos_dados[nome_coluna])    
         
@@ -69,13 +69,13 @@ if processar:
 
     
     st.markdown("")
-    st.markdown("<h1 style='text-align: left; color: #33A6F9' font-weight:bold>Resultado da Previsão:</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: left; color: #33A6F9' font-weight:bold>Resultados da Previsão:</h1>", unsafe_allow_html=True)
     dicionario_previsao = {0: "Baixo risco de efeitos adversos", 1: "Alto risco de efeitos adversos"}
     if previsao[0] == 0:
-        st.markdown(f"<div style='font-size: 28px; font-weight:bold'>  {dicionario_previsao[previsao[0]]}</div>", unsafe_allow_html=True)
+        st.markdown(f"<div style='font-size: 28px; font-weight:bold'>Previsão absoluta: {dicionario_previsao[previsao[0]]}</div>", unsafe_allow_html=True)
         st.markdown(f"<div style='font-size: 28px; font-weight: bold'>Probabilidade: {previsao_proba[0][0]*100:.2f}%</div>", unsafe_allow_html=True)
     else:
-        st.markdown(f"<div style='font-size: 28px; font-weight:bold'>  {dicionario_previsao[previsao[0]]}</div>", unsafe_allow_html=True)
+        st.markdown(f"<div style='font-size: 28px; font-weight:bold'>Previsão absoluta:  {dicionario_previsao[previsao[0]]}</div>", unsafe_allow_html=True)
         st.markdown(f"<div style='font-size: 28px; font-weight: bold'>Probabilidade: {previsao_proba[0][1]*100:.2f}%</div>", unsafe_allow_html=True)
     
     st.markdown("")
@@ -84,7 +84,4 @@ if processar:
     
     
     
-
-
-
 

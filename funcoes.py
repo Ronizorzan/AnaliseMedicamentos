@@ -209,7 +209,7 @@ def criar_grafo(dataframe):
         - grafo (Digraph): Objeto Graphviz representando o grafo.        
     """
     # Inicializa o grafo
-    grafo = Digraph(format='png', engine='fdp', graph_attr={'splines': "ortho", "bgcolor": "#0E1117"})
+    grafo = Digraph(format='png', engine='fdp', graph_attr={'splines': "neato", "bgcolor": "#0E1117"})
     
     # Loop pelos medicamentos principais e substitutos
     for _, row in dataframe.iterrows():
@@ -282,10 +282,6 @@ def Treexplainer(model, novos_dados):
         expected_value = float(tree_explainer.expected_value)
     
     
-    # (Opcional) Mostra os valores para comparação
-    print("Soma original dos SHAP values:", np.sum(shap_values))
-    print("Soma após filtragem:", np.sum(shap_values))
-
     # Gera o force plot usando os valores filtrados
     force_plot = shap.plots.force(expected_value, shap_values, novos_dados)
 

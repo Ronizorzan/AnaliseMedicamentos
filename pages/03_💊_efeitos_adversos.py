@@ -11,7 +11,10 @@ with st.sidebar:
     classe = st.selectbox(":blue[Selecione a classe terapêutica]", options=data["Therapeutic Class"].dropna().unique(), 
                           help="Selecione a classe terapêutica para\
                              \n visualizar os efeitos adversos dos medicamentos")
-    processar = st.button(":blue[Gerar a Nuvem de Palavras]")    
+    processar = st.button(":blue[Gerar a Nuvem de Palavras]") 
+
+st.markdown(f"<div style='font-size: 18px; font-weight: bold'>Número de Classes Terapêuticas disponíveis:\
+            {data['Therapeutic Class'].dropna().nunique()}", unsafe_allow_html=True) #Exibição das classes terapêuticas disponíveis
 if processar:
         progresso = st.progress(50, text="Carregando a nuvem de palavras... Por favor aguarde um momento.")        
         wordcloud = plot_cloud(data, classe)
@@ -30,7 +33,7 @@ if processar:
                     facilitando a identificação rápida dos riscos associados ao uso dos medicamentos.*")
             st.subheader(":blue[***Explore e Descubra:***]")
             st.markdown("**Escolha da classe terapêutica**")
-            st.markdown("Escolha entre as classes dispomíveis e visualize os efeitos adversos mais comuns associados a cada uma delas. \
+            st.markdown("*Escolha entre as classes dispomíveis e visualize os efeitos adversos mais comuns associados a cada uma delas. \
                     \n Isso pode ajudar a identificar padrões e tendências, permitindo uma análise mais aprofundada dos riscos associados a cada classe de medicamentos.*")
             st.markdown("*Interaja com o filtro e conheça os sintomas e reações mais recorrentes para embasar decisões clínicas,\
                          otimizando o acompanhamento e a intervenção terapêutica quando necessário.*")            

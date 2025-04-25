@@ -26,6 +26,9 @@ with st.sidebar:
             dosagem = st.selectbox("Insira a dosagem (opcional)", dosagens)
     processar = st.button(":blue[Processar]")
   
+st.markdown(f"<div style=' font-size:18px; font-weight: bold'>Total de Medicamentos\
+             disponíveis para consulta atualmente: {len(dados):,.0f}", unsafe_allow_html=True) #Exibição do total de medicamentos disponíveis
+st.markdown("<hr style='border: 1px solid #33A6F9; margin: 20px 0;'>", unsafe_allow_html=True) #Linha horizontal para separação visual
 if processar:        
     #Página exibida caso a dosagem não seja selecionada
     if dosagem is None and medicamento:
@@ -39,8 +42,8 @@ if processar:
             figura.update_layout(title_text="Número de Concorrentes conhecidos", title_x=0.25, title_font_size=20, 
                                  yaxis_title="Número de Concorrentes", xaxis_title="Medicamento")            
             st.plotly_chart(figura, use_container_width=True)
-            st.markdown("**Estes painéis foram projetados para revelar informações essenciais que apoiam decisões mais seguras e precisas " \
-            " --- desde a competitividade dos produtos até a gestão de riscos clínicos dos medicamentos**")
+            st.markdown("**Estes painéis foram projetados para revelar informações essenciais que apoiam decisões \
+                        \nmais seguras e precisas desde a competitividade dos produtos até a gestão de riscos clínicos dos medicamentos**")
 
         with col2:
             st.subheader("Análise de Efeitos Adversos", divider="blue")
@@ -84,6 +87,7 @@ if processar:
             st.graphviz_chart(grafo2.source, use_container_width=True)
         else:
             # Criar e exibir o grafo normalmente
+            st.markdown("<h2 style='text-align: left; color: #33A6F9'>Análise de Concorrência</h2>", unsafe_allow_html=True)            
             grafo = criar_grafo(dados)
             st.graphviz_chart(grafo.source, use_container_width=True)      
         

@@ -1,6 +1,7 @@
 import streamlit as st
 from funcoes import *
 from joblib import load
+from numpy import load as load_numpy
 
 #Configuração da página
 st.set_page_config(page_title="Análise de Medicamentos", layout="wide")
@@ -12,6 +13,8 @@ valores_unicos = {} #Dicionário para armazenar os valores únicos de cada colun
 categoricas = ["Action Class", "Chemical Class", "Habit Forming", "Therapeutic Class", "use0"]
 for coluna in categoricas:
     valores_unicos[coluna] = load(f"objects/encoder_{coluna}.joblib")
+cross_val = load_numpy("objects/cross_val.npy", allow_pickle=True).item() #Carregamento e exibição do cross_val
+st.markdown(f"<div style='font-size: 18px; font-weight: bold'> Acurácia aproximada do Modelo: {cross_val*100:.2f}%</div>", unsafe_allow_html=True)
 
 
 with st.sidebar:
@@ -58,18 +61,18 @@ if processar:
     
     progresso.progress(75, "Gerando Interpretação!")
     figura = Treexplainer(modelo, novos_dados)
-    st.markdown("<h2 style='text-align: center;'>Interpretação do Modelo</h2>", unsafe_allow_html=True)        
+    st.markdown("<h1 style='text-align: center; color: #33A6F9'>Interpretação do Modelo</h1>", unsafe_allow_html=True)        
     st_shap(figura, height=200, width=1600) # Plotar o gráfico SHAP    
     progresso.progress(100, "Processamento concluído!")   
 
     st.markdown("<div style='font-size: 18px; font-weight: bold'>A interpretação do gráfico SHAP fornece uma visão clara" \
-            " e objetiva sobre a contribuição de cada variável<br>para a previsão do modelo. " \
-            "A interpretação é gerada em tempo real através dos dados inseridos.", unsafe_allow_html=True)
+            " e objetiva sobre a contribuição de cada variável para a previsão do modelo.\
+            Embora simples, essa visualização é extremamente poderosa, pois permite que os usuários compreendam em tempo real como cada variável\
+            inserida influenciou na decisão final. Trazendo mais transparência e confiança às previsões do modelo.", unsafe_allow_html=True)
     
-
     
-    st.markdown("")
-    st.markdown("<h1 style='text-align: left; color: #33A6F9' font-weight:bold>Resultados da Previsão:</h1>", unsafe_allow_html=True)
+    st.markdown("<hr style='border: 1px solid #33A6F9; margin-top: 20px; margin-bottom: 20px;'>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center; color: #33A6F9'>Resultados da Previsão:</h1>", unsafe_allow_html=True)    
     dicionario_previsao = {0: "Baixo risco de efeitos adversos", 1: "Alto risco de efeitos adversos"}
     if previsao[0] == 0:
         st.markdown(f"<div style='font-size: 28px; font-weight:bold'>Previsão absoluta: {dicionario_previsao[previsao[0]]}</div>", unsafe_allow_html=True)
@@ -80,7 +83,10 @@ if processar:
     
     st.markdown("")
     st.markdown("<div style='font-size: 18px; font-weight: bold'>Este indicador reflete a probabilidade de ocorrência de efeitos adversos menores que a média observada,\
-                 <br>indicando a segurança do medicamento em comparação à outros disponíveis no mercado.</div>", unsafe_allow_html=True)    
+                 indicando a segurança do medicamento em comparação à outros disponíveis no mercado. Observe que de um modo geral\
+                 todos os medicamentos estão suscetíveis a oferecerem riscos à saúde, porém medicamentos classificados como de 'Baixo risco'\
+                embora não tenham nenhuma comprovação científica, oferecem uma boa base para que novas pesquisas "
+                "baseadas nesses medicamentos possam levar a medicamentos mais seguros, o que algo a ser considerado </div>", unsafe_allow_html=True)    
     
     
     

@@ -82,10 +82,11 @@ if processar:
         st.markdown(f"<div style='font-size: 28px; font-weight: bold'>Probabilidade: {previsao_proba[0][1]*100:.2f}%</div>", unsafe_allow_html=True)
     
     st.markdown("")
-    st.markdown("<div style='font-size: 18px; font-weight: bold'>Este indicador representa a probabilidade de ocorrência de efeitos adversos inferiores à média observada,\
-    destacando a segurança relativa do medicamento em comparação com outras opções disponíveis no mercado. Embora, de forma geral, todos os medicamentos apresentem\
-    algum nível de risco à saúde, aqueles classificados como 'Baixo risco' possuem, mesmo sem comprovação científica definitiva, um potencial promissor para servir\
-    de base a futuras pesquisas. Tais estudos podem resultar no desenvolvimento de medicamentos ainda mais seguros, o que é um aspecto relevante a ser levado em consideração. </div>", unsafe_allow_html=True)    
+    st.markdown("<div style='font-size: 18px; font-weight: bold'>Este indicador reflete a probabilidade de ocorrência de efeitos adversos menores que a média observada,\
+                 indicando a segurança do medicamento em comparação à outros disponíveis no mercado. Observe que de um modo geral\
+                 todos os medicamentos estão suscetíveis a oferecerem riscos à saúde, porém medicamentos classificados como de 'Baixo risco'\
+                embora não tenham nenhuma comprovação científica, oferecem uma boa base para que novas pesquisas "
+                "baseadas nesses medicamentos possam levar a medicamentos mais seguros, o que algo a ser considerado </div>", unsafe_allow_html=True)    
     
     
     

@@ -87,7 +87,7 @@ if processar:
             st.graphviz_chart(grafo2.source, use_container_width=True)
         else:
             # Criar e exibir o grafo normalmente
-            st.markdown("<h2 style='text-align: left; color: #33A6F9'>Análise de Concorrência</h2>", unsafe_allow_html=True)            
+            st.markdown("<h2 style='text-align: left; color: #33A6F9'>Análise de Concorrentes</h2>", unsafe_allow_html=True)            
             grafo = criar_grafo(dados)
             st.graphviz_chart(grafo.source, use_container_width=True)      
         
